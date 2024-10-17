@@ -1,0 +1,35 @@
+The congestion control scheme implemented in the provided code follows the principles of TCP-like congestion control, incorporating elements of Slow Start, Congestion Avoidance, and Fast Recovery phases:
+
+Slow Start Phase:
+Begins with a congestion windoww (congestion_window) size of 1 (defined by INITIAL_CONGESTION_WINDOW_SIZE).
+On each ACK received, the congestion_window size is increased by 1, doubling the window each RTT.
+Transitions to Congestion Avoidance phase when congestion_window exceeds the slow start threshold (slow_start_threshold), set initially to a large value.
+
+Congestion Avoidance Phase:
+Increases congestion_window gradually, by 1 / congestion_window for each ACK received, aiming for linear increase in window size.
+This phase continues until a packet loss is detected.
+
+Fast Recovery Phase (Triggered by triple duplicate ACKs):
+Temporarily increases the congestion_window by one for each duplicate ACK received.
+If the retransmission threshold (MAX_RETRANSMISSIONS_THRESHOLD) is hit, it reduces the congestion_window and slow_start_threshold to half of the congestion_window at the time of loss detection.
+Exits Fast Recovery by setting the congestion_window to slow_start_threshold and moving to Congestion Avoidance.
+
+Loss Detection:
+Identified by either timeout or the receipt of triple duplicate ACKs.
+On timeout, resets congestion_window to 1 and slow_start_threshold to half of the current window size, then restarts from Slow Start.
+On triple duplicate ACKs, enters Fast Recovery phase.
+
+ACK Processing:
+Properly adjusts congestion_window based on the current phase and the reception of ACKs..
+Moves the send window start forward upon receiving new ACKs, allowing new packets to be sent.
+
+Packet Retransmission:
+Triggered by ACK timeout or detection of triple duplicate ACKs, indicating packet loss.
+In case of timeout, resets to Slow Start with reduced congestion_window and slow_start_threshold.
+In case of triple duplicate ACKs, performs necessary adjustments depending on the current phase (e.g, entering Fast Recovery).
+
+
+
+
+
+

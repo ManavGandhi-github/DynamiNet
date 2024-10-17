@@ -1,0 +1,13 @@
+---
+:id: 239454670
+:submitters:
+- :name: HRITIK ARYA
+  :email: hritikarya70@gmail.com
+- :name: MANAV GANDHI
+  :email: manavgbruin24@ucla.edu
+:created_at: !ruby/object:ActiveSupport::TimeWithZone
+  utc: 2024-03-16 04:14:43.745110000 Z
+  zone: !ruby/object:ActiveSupport::TimeZone
+    name: America/Los_Angeles
+  time: 2024-03-15 21:14:43.745110000 Z
+:status: processed
